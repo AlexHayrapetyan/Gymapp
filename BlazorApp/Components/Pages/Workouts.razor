@@ -1,0 +1,17 @@
+﻿    @page "/workouts"
+
+    @page "/workouts/{MuscleGroup}"
+
+    <h1>Available Workouts</h1>
+
+    <ul>
+        <li><a href="/workouts/legs">Legs</a></li>
+        <li><a href="/workouts/arms">Arms</a></li>
+        <li><a href="/workouts/back">Back</a></li>
+    </ul>
+
+    @code {
+    [Parameter]
+        public string MuscleGroup { get; set; }
+    }
+

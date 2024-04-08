@@ -1,0 +1,64 @@
+﻿@rendermode InteractiveServer
+@page "/Exercices"
+@using BlazorApp.Data.Entities
+@inject ExerciceService exercicesService
+
+<NavLink class="nav-link" href="AddNewExercice">
+	<span class="bi bi-plus" aria-hidden="true">Add new Exercise</span>
+</NavLink>
+<h3>ExerciseList</h3>
+
+@if(ExObj is null)
+{
+	<p><em>Loading.........!</em></p>
+}
+else
+{
+	<table class="table">
+		<thead>
+			<tr>
+				<th>
+					Exercise Name
+				</th>
+				<th>
+					Description
+				</th>
+				<th>
+					Exercise Difficulty Level
+				</th>
+				<th>
+					Muscle Groups affected
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach(var ex in ExObj)
+			{
+				<tr>
+					<td>
+						@ex.Name
+					</td>
+					<td>
+						@ex.Description
+					</td>
+					<td>
+						@ex.DifLevel
+					</td>
+					<td>
+						@ex.MuscleGroup
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}
+
+@code {
+	List<Exercice> ExObj ;
+
+	protected override async Task OnInitializedAsync()
+	{
+		ExObj = await Task.Run(() => exercicesService.GetAllExerciceAsync());
+	}
+}
+

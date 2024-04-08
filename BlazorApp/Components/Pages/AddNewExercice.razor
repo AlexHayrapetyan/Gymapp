@@ -1,0 +1,53 @@
+﻿@page "/AddNewExercice"
+@using BlazorApp.Data.Entities
+@inject ExerciceService exerciceService
+@inject NavigationManager NavigationManager
+
+<h3>Add new exercise</h3>
+<hr />
+
+<form>
+	<div class="row">
+		<div class="col-md-8">
+			<div class="for-group">
+				<label for="Name" class="control-label">Name</label>
+				<input form="Name" class="form-control" @bind="@obj.Name" />
+			</div>
+			<div class="for-group">
+				<label for="Description" class="control-label">Description</label>
+				<input form="Description" class="form-control" @bind="@obj.Description" />
+			</div>
+			<div class="for-group">
+				<label for="DifLevel" class="control-label">Difficulty level</label>
+				<input form="DifLevel" class="form-control" @bind="@obj.DifLevel" />
+			</div>
+			<div class="for-group">
+				<label for="MuscleGroup" class="control-label">Muscle Group</label>
+				<input form="MuscleGroup" class="form-control" @bind="@obj.MuscleGroup" />
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+			<div class="form-group">
+				<input type="button" class="btn btn-primary" @onclick="@AddNewExerciceDetails" value="save exercise" />
+				<input type="button" class="btn btn-danger" @onclick="@Cancel" value="Cancel" />
+			</div>
+		</div>
+
+	</div>
+</form>
+
+@code {
+	Exercice obj = new Exercice();
+	protected async void AddNewExerciceDetails()
+	{
+		await exerciceService.AddNewExercice(obj);
+		NavigationManager.NavigateTo("Exercises");
+	}
+	protected async void Cancel()
+	{
+		NavigationManager.NavigateTo("Exercises");
+	}
+}
+
