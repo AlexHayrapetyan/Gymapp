@@ -17,9 +17,18 @@
 				<label for="Description" class="control-label">Description</label>
 				<input form="Description" class="form-control" @bind="@obj.Description" />
 			</div>
-			<div class="for-group">
-				<label for="DifLevel" class="control-label">Difficulty level</label>
-				<input form="DifLevel" class="form-control" @bind="@obj.DifLevel" />
+			<div class="form-group row">
+				<label for="DifLevel" class="col-sm-2 col-form-label">
+					Difficuly Level
+				</label>
+				<div class="col-sm-10">
+					<InputSelect @bind-Value="Exercice.DifficultyLevel" class="form-control">
+						@foreach (var DifLevel in Enum.GetValues(typeof(DifficultyLevel)))
+						{
+							<option value="@DifLevel">@DifLevel</option>
+						}
+					</InputSelect>
+				</div>
 			</div>
 			<div class="for-group">
 				<label for="MuscleGroup" class="control-label">Muscle Group</label>
